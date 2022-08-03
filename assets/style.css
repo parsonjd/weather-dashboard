@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header {
+  background-color: rgb(1, 1, 65);
+}
+
+.search-column {
+  background-color: #e2e2e2;
+}
+
+#submit {
+  display: block;
+}
