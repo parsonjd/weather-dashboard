@@ -14,3 +14,31 @@ header {
 #submit {
   display: block;
 }
+
+/* Format UV index severity buttons */
+.severe {
+  background-color: red;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  height: 1.75rem;
+}
+
+.moderate {
+  background-color: yellow;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  height: 1.75rem;
+}
+
+.favorable {
+  background-color: green;
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  height: 1.75rem;
+}
+
+#current-forecast {
+  border: 1px solid black;
+}
