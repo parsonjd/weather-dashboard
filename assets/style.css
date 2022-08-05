@@ -42,3 +42,7 @@ header {
 #current-forecast {
   border: 1px solid black;
 }
+
+.each-day {
+  display: inline;
+}

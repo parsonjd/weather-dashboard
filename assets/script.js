@@ -2,6 +2,7 @@ citySearch = document.querySelector("#city");
 formSubmit = document.querySelector("#search-city");
 currentCity = document.querySelector("#current-city");
 currentWeather = document.querySelector("#current-weather");
+fiveDay = document.querySelector("#five-day");
 
 
 //My API Key
@@ -13,6 +14,7 @@ function handleForm(e) {
     let cityName = citySearch.value.trim();
     if (cityName) {
         cityWeather(cityName);
+        fiveDayOutlook(cityName);
     } else {
         alert("Please include a city in your search!")
     }
@@ -34,7 +36,7 @@ function renderWeather(data, city) {
 
     //Display today's date
     let date = document.createElement("span");
-    date.innerText = " (" + moment().format("MMM D, YYYY") + ")";
+    date.innerText = " (" + moment().format("MM/DD/YY") + ")";
     currentCity.append(date);
 
     //Display the weather ICON
@@ -45,7 +47,7 @@ function renderWeather(data, city) {
 
     //Display current temperature
     let currentTemp = document.createElement("p");
-    currentTemp.innerText = `Temp: ${data.main.temp}`;
+    currentTemp.innerText = `Temp: ${data.main.temp} \u2109`;
     currentWeather.append(currentTemp);
     let currentWind = document.createElement("p");
 
@@ -68,7 +70,6 @@ function renderWeather(data, city) {
 async function uvIndex(latitude, longitude) {
     let response = await fetch(`https://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=${apiKey}`);
     let data = await response.json();
-    console.log(data);
     renderUVIndex(data);
 }
 
@@ -82,7 +83,7 @@ function renderUVIndex(UV) {
     //Determines if the UV button is red/yellow/green based off EPA guidelines on UV index severity
     if (UV.value <= 2) {
         currentUVI.classList = "favorable";
-    } else if (UV.index > 2 && UV.index < 8) {
+    } else if (UV.value > 2 && UV.value < 8) {
         currentUVI.classList = "moderate";
     } else {
         currentUVI.classList = "severe";
@@ -90,6 +91,59 @@ function renderUVIndex(UV) {
 
     UVIdiv.append(currentUVI);
     currentWeather.append(UVIdiv);
+}
+
+//Get the five-day outlook from the API
+async function fiveDayOutlook(city) {
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`);
+    let data = await response.json();
+    renderFiveDay(data);
+}
+
+//Display five-day forecast
+function renderFiveDay(days) {
+    fiveDay.innerText = "";
+    //Increment by eight so the eight time hacks of each day are skipped over so we can get a five-day outlook
+    for (let i = 1; i < days.list.length; i += 8) {
+        let dayForecast = days.list[i];
+        console.log(dayForecast);
+
+        //Create div to hold each day's forecast - keeping each day a column width of 2
+        let fiveDayForecast = document.createElement("div");
+        fiveDayForecast.classList = "col-2 bg-primary text-light text-center each-day m-2";
+
+        //Create and display date at top of the div
+        let fiveDayDate = document.createElement("h5");
+        fiveDayDate.innerText = moment(dayForecast.dt_txt).format("MM/DD/YY");
+        fiveDayForecast.append(fiveDayDate);
+        fiveDay.append(fiveDayForecast);
+
+        //Create and display daily weather icon
+        let dailyIcon = document.createElement("img");
+        dailyIcon.classList = "text-center";
+        dailyIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dayForecast.weather[0].icon}@2x.png`);
+        dailyIcon.setAttribute('height', "30px");
+        fiveDayForecast.append(dailyIcon);
+
+        //Create and display daily temperature
+        let dailyTemp = document.createElement("p");
+        dailyTemp.classList = "text-center";
+        dailyTemp.innerText = `Temp: ${dayForecast.main.temp} \u2109`;
+        fiveDayForecast.append(dailyTemp);
+
+        //Create and display wind velocity
+        let dailyWind = document.createElement("p");
+        dailyTemp.classList = "text-center";
+        dailyWind.innerText = `Wind: ${dayForecast.wind.speed} MPH`;
+        fiveDayForecast.append(dailyWind);
+
+        //Create and display humidity
+        let dailyHum = document.createElement("p");
+        dailyHum.classList = "text-center";
+        dailyHum.innerText = `Humidity: ${dayForecast.main.humidity} %`;
+        fiveDayForecast.append(dailyHum);
+
+    }
 }
 
 //Handles form submission
