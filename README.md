@@ -10,4 +10,4 @@ Finally, local storage is utilized to display recent city searches upon page ref
 
 Deployed URL:  https://parsonjd.github.io/weather-dashboard/
 
-[![weather.png](https://i.postimg.cc/RF9cVBvD/weather.png)](https://postimg.cc/yJQJv2gm)
+[![weather.png](https://i.postimg.cc/mDtXxnGq/weather.png)](https://postimg.cc/r02CxQsC)
