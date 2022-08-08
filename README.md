@@ -8,5 +8,6 @@ Recent city searches are saved as buttons so user can easily access past searche
 
 Finally, local storage is utilized to display recent city searches upon page refresh or reload.
 
+Deployed URL:  https://parsonjd.github.io/weather-dashboard/
 
 [![weather.png](https://i.postimg.cc/RF9cVBvD/weather.png)](https://postimg.cc/yJQJv2gm)
