@@ -7,3 +7,6 @@ Additionally, a five-day forecast for the city is displayed with temperature, wi
 Recent city searches are saved as buttons so user can easily access past searches.
 
 Finally, local storage is utilized to display recent city searches upon page refresh or reload.
+
+
+[![weather.png](https://i.postimg.cc/RF9cVBvD/weather.png)](https://postimg.cc/yJQJv2gm)
