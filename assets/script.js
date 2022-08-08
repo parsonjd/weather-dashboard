@@ -38,15 +38,17 @@ function errorMessage() {
 function init() {
     let storedCities = JSON.parse(localStorage.getItem("cities"));
 
-    for (let city of storedCities) {
+    if (storedCities) {
+        for (let city of storedCities) {
 
-        recentCity = document.createElement("button");
-        recentCity.innerText = city;
-        recentCity.classList = "w-100 btn-secondary p-2 my-2 recent-button";
-        recentCity.setAttribute("data-type", city)
-        recentCity.setAttribute("type", "submit");
+            recentCity = document.createElement("button");
+            recentCity.innerText = city;
+            recentCity.classList = "w-100 btn-secondary p-2 my-2 recent-button";
+            recentCity.setAttribute("data-type", city)
+            recentCity.setAttribute("type", "submit");
 
-        recentSearchCont.prepend(recentCity);
+            recentSearchCont.prepend(recentCity);
+        }
     }
 }
 
