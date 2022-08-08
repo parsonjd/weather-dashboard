@@ -11,8 +11,18 @@ header {
   background-color: #e2e2e2;
 }
 
+/* Saved city search buttons */
+.recent-button {
+  border-radius: 8px;
+}
+
 #submit {
   display: block;
+}
+
+.search-history {
+  border-top: 1px solid black;
+
 }
 
 /* Format UV index severity buttons */
